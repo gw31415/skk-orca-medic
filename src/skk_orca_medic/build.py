@@ -1,4 +1,7 @@
 import os
+import re
+
+support = re.compile('^[\u3041-\u3096ー\\d!#$%&()*+,./:<=>?]+$')
 
 
 def main():
@@ -14,9 +17,9 @@ def main():
         if "#T35" not in line:  # assert the content is a word
             print(f"::Skipped:: not a word: {line.strip()}")
             continue
-        if "/" in line:
-            print(f"::Skipped:: not formattable: {line.strip()}")
-            continue
         [yomi, word] = line.split("#T35")
         [yomi, word] = [yomi.strip(), word.strip()]
-        out.write(f"{yomi}/{word}/\n")
+        if not support.fullmatch(yomi):
+            print(f"::Skipped:: yomi contains not-supported char: {yomi}")
+            continue
+        out.write(f"{yomi} /{word}/\n")
