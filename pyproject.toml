@@ -1,0 +1,25 @@
+[project]
+name = "skk_orca_medic"
+version = "0.1.0"
+description = "Add your description here"
+authors = [{ name = "gw31415", email = "git@amas.dev" }]
+dependencies = [
+]
+readme = "README.md"
+requires-python = ">= 3.11"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "black>=24.2.0",
+]
+
+[tool.rye.scripts]
+build = { call = "skk_orca_medic:main()" }
+
+[tool.hatch.metadata]
+allow-direct-references = true
